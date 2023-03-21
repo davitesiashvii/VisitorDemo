@@ -47,17 +47,17 @@
 
             <ng-container matColumnDef="firstName">
                 <th mat-header-cell *matHeaderCellDef>სახელი</th>
-                <td mat-cell *matCellDef="let element" [textContent]="element.FirstName"></td>
+                <td mat-cell *matCellDef="let element" [textContent]="element.firstName"></td>
             </ng-container>
 
             <ng-container matColumnDef="lastName">
                 <th mat-header-cell *matHeaderCellDef>გვარი</th>
-                <td mat-cell *matCellDef="let element" [textContent]="element.LastName"></td>
+                <td mat-cell *matCellDef="let element" [textContent]="element.lastName"></td>
             </ng-container>
 
             <ng-container matColumnDef="idNumber">
                 <th mat-header-cell *matHeaderCellDef>პირადი ნომერი</th>
-                <td mat-cell *matCellDef="let element" [textContent]="element.privateNumber"></td>
+                <td mat-cell *matCellDef="let element" [textContent]="element.idNumber"></td>
             </ng-container>
 
             <!-- <ng-container matColumnDef="releaseDate">

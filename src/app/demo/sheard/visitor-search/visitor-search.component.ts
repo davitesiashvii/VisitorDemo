@@ -11,9 +11,9 @@ interface SearchPrisonersForConfrontationModel {
 }
 
 @Component({
-    templateUrl: './prisoner-search.component.html'
+    templateUrl: './visitor-search.component.html'
 })
-export class VIsitorSearch implements OnInit {
+export class VisitorSearch implements OnInit {
     model: any = {}
 
     dataSource: MatTableDataSource<any>;
@@ -35,15 +35,15 @@ export class VIsitorSearch implements OnInit {
 
     search(value: SearchPrisonersForConfrontationModel) {
         debugger;
-        this.searchResults = this._demoCommonDate.prisoners;
+        this.searchResults = this._demoCommonDate.visitors;
         if (value.idNumber.length > 0) {
-            this.searchResults = this.searchResults.filter(x => x.privateNumber.includes(value.idNumber));
+            this.searchResults = this.searchResults.filter(x => x.idNumber.includes(value.idNumber));
         }
         if (value.firstName.length > 0) {
-            this.searchResults = this.searchResults.filter(x => x.FirstName.includes(value.firstName));
+            this.searchResults = this.searchResults.filter(x => x.firstName.includes(value.firstName));
         }
         if (value.lastName.length > 0) {
-            this.searchResults = this.searchResults.filter(x => x.LastName.includes(value.lastName));
+            this.searchResults = this.searchResults.filter(x => x.lastName.includes(value.lastName));
         }
 
         this.init(this.searchResults);

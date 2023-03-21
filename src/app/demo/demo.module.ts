@@ -43,6 +43,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatLuxonDateModule } from "@angular/material-luxon-adapter";
 import { VisitorSidebarEditEditComponent } from "./visit/visitor-sidebar/visitor-sidebar-edit.component";
 import { PrisonerSearch } from "./sheard/prisoner-search/prisoner-search.component";
+import { VisitorSearch } from "./sheard/visitor-search/visitor-search.component";
 
 
 
@@ -53,7 +54,8 @@ import { PrisonerSearch } from "./sheard/prisoner-search/prisoner-search.compone
         VisitEditComponent,
         DemoRootComponent,
         VisitorSidebarEditEditComponent,
-        PrisonerSearch
+        PrisonerSearch,
+        VisitorSearch
 
     ],
     imports: [

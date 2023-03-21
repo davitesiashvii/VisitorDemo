@@ -25,7 +25,7 @@ export class PrisonerSearch implements OnInit {
     constructor(private readonly _dialogRef: MatDialogRef<any>,
         private readonly _demoCommonDate: DemoCommonData,) {
         this.model = { idNumber: '', firstName: '', lastName: '' };
-        this.displayedColumns = ['firstName', 'lastName', 'idNumber', 'buttons'];
+        this.displayedColumns = ['firstName', 'lastName', 'idNumber','buttons'];
         this.searchResults = [];
     }
 

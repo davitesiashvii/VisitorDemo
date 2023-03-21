@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { FuseMediaWatcherService } from "@fuse/services/media-watcher";
 import { DemoCommonData } from "app/demo/demo-common.data";
 import { PrisonerSearch } from "app/demo/sheard/prisoner-search/prisoner-search.component";
+import { VisitorSearch } from "app/demo/sheard/visitor-search/visitor-search.component";
+import { VisitorService } from "app/demo/visitor/visitor.service";
 import { DateTime } from "luxon/src/datetime";
 import { Subject, takeUntil } from "rxjs";
 
@@ -23,8 +25,10 @@ export class VisitEditComponent implements OnInit {
     drawerMode: 'side' | 'over';
     opened: boolean = false;
     prisoner:any = {};
+    visitor: any = {};
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     prisonerButtonText: string = "პატიმრის დამატება";
+    //prisonerButtonText: string = "პატიმრის დამატება";
     prisonerAdded: boolean = false;
     sidebarOpened: boolean = false;
 
@@ -102,6 +106,19 @@ export class VisitEditComponent implements OnInit {
         .subscribe((result: any | undefined) => {
             debugger;
             this.prisoner = this._demoCommonDate.prisoners.find(x=>x.Id === result);
+            this.prisonerButtonText = "პატიმრის შეცვლა";
+            //let roteText = '/visitor/visit-edit/side/'+this.prisoner.Id.toString(); 
+            this.matDrawer1.close();
+            this.sidebarOpened = false;
+        })
+    }
+
+    searchVisitor(){
+        this._matDialog.open(VisitorSearch, {autoFocus: false})
+        .afterClosed()
+        .subscribe((result: any | undefined) => {
+            debugger;
+            this.visitor = this._demoCommonDate.prisoners.find(x=>x.Id === result);
             this.prisonerButtonText = "პატიმრის შეცვლა";
             //let roteText = '/visitor/visit-edit/side/'+this.prisoner.Id.toString(); 
             this.matDrawer1.close();
