@@ -1,0 +1,326 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+    <ng-container>
+        <div class="flex flex-auto overflow-hidden">
+
+            <!-- Products list -->
+            <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
+
+
+                <form #form="ngForm" class="flex flex-col w-full">
+
+                    <div class="flex flex-col sm:flex-row p-8">
+                        <div class="flex flex-auto flex-wrap">
+                            <div class="flex flex-col w-full ">
+                                <div class="flex">
+                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
+                                        <mat-label>სახელი</mat-label>
+                                        <input matInput name="firstName" [(ngModel)]="model.firstName">
+                                    </mat-form-field>
+                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
+                                        <mat-label>გვარი</mat-label>
+                                        <input matInput name="lastName" [(ngModel)]="model.lastName">
+                                    </mat-form-field>
+                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
+                                        <mat-label>მამის სახელი</mat-label>
+                                        <input matInput name="middleName" [ngModel]="model.middleName">
+                                    </mat-form-field>
+
+                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-2">
+                                        <mat-label>დაბადების თარიღი</mat-label>
+                                        <input matInput [(ngModel)]="model.birthsDate" name="birthsDate"
+                                            [matDatepicker]="picker1">
+                                        <mat-datepicker-toggle matSuffix [for]="picker1">
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="flex">
+                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
+                                        <mat-label>სქესი</mat-label>
+                                        <input matInput [(ngModel)]="model.gender" name="gender">
+                                    </mat-form-field>
+
+                                    <mat-form-field class="fuse-mat-dense fuse-mat-emphasized-affix w-1/4 pr-7">
+                                        <mat-label>პირადობის მოწმობა/პასპორტი</mat-label>
+                                        <input matInput name="privateNumber" [(ngModel)]="model.privaterNumber">
+                                        <mat-select [value]="'პირადობა'" matPrefix>
+                                            <mat-option [value]="'პირადობა'">პირადობა</mat-option>
+                                            <mat-option [value]="'პასპორტი'">პასპორტი</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
+                                        <mat-label>ელფოსტა</mat-label>
+                                        <input matInput name="email" [(ngModel)]="model.email">
+                                    </mat-form-field>
+                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-2">
+                                        <mat-label>ტელეფონი</mat-label>
+                                        <input matInput type="number" name="mobileNumber"
+                                            [(ngModel)]="model.mobileNumber">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="flex">
+                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
+                                        <mat-label>მოქალაქეობის ტიპი</mat-label>
+                                        <mat-select [(ngModel)]="model.citizenshipTypeId" name="citizenshipType">
+                                            <mat-option></mat-option>
+                                            <ng-container *ngFor="let citizenshipType of citizenshipTypes">
+                                                <mat-option [value]="citizenshipType.id">
+                                                    {{citizenshipType.name}}
+                                                </mat-option>
+                                            </ng-container>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field *ngIf="model.citizenshipTypeId == 2 || model.citizenshipTypeId == 3"
+                                        class="fuse-mat-dense w-1/4 pr-7">
+                                        <mat-label>მოქალაქეობა</mat-label>
+                                        <mat-select [(ngModel)]="model.citizenshipId" name="citizenship">
+                                            <ng-container *ngFor="let citizenship of countries">
+                                                <mat-option [value]="citizenship.id">
+                                                    {{citizenship.name}}
+                                                </mat-option>
+                                            </ng-container>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field *ngIf="model.citizenshipTypeId == 3"
+                                        class="fuse-mat-dense w-1/4 pr-7">
+                                        <mat-label>მეორე მოქალაქეობა</mat-label>
+                                        <mat-select [(ngModel)]="model.secondCitizenshipId" name="secondCitizenship">
+                                            <ng-container *ngFor="let citizenship of countries">
+                                                <mat-option [value]="citizenship.id">
+                                                    {{citizenship.name}}
+                                                </mat-option>
+                                            </ng-container>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field *ngIf="model.citizenshipTypeId == 1"
+                                        class="fuse-mat-dense w-1/4 pr-7">
+                                        <mat-label>მოქალაქეობა</mat-label>
+                                        <input matInput name="mobi" [readonly]="'true'" [(ngModel)]="countries[0].name">
+                                    </mat-form-field>
+
+                                    <div *ngIf="model.citizenshipTypeId !== 1 && model.citizenshipTypeId !== 2 && model.citizenshipTypeId !== 3"
+                                        class="fuse-mat-dense w-1/4 pr-7">
+
+
+                                    </div>
+                                    <div *ngIf="model.citizenshipTypeId !== 3" class="fuse-mat-dense w-1/4 pr-7">
+
+
+                                    </div>
+
+
+
+                                    <div class="flex float-right items-center justify-between w-1/4 pl-16 pr-7">
+                                        <div class="flex items-center">
+                                            <button mat-flat-button class="w-60" [color]="'primary'">
+                                                გადამოწმება სსგს-ში
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="flex pl-6">
+                        <button class="ml-4" mat-flat-button [color]="'primary'" (click)="newAddres()">
+                            <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                            <span class="ml-2 mr-1">მისამართის დამატება</span>
+                        </button>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row p-8">
+                        <div class="flex flex-auto flex-wrap">
+                            <div class="flex flex-col w-full ">
+                                <ng-container>
+                                    <div class="grid">
+                                        <div class="grid-cols-6 z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
+                                            matSort matSortDisableClear>
+                                            <div class="hidden md:block" [mat-sort-header]="'sku'">
+                                                ტიპი
+                                            </div>
+                                            <div [mat-sort-header]="'name'">ქვეყანა</div>
+                                            <div class="hidden sm:block" [mat-sort-header]="'price'">
+                                                რეგიონი
+                                            </div>
+                                            <div class="hidden sm:block" [mat-sort-header]="'stock'">
+                                                ქალაქი
+                                            </div>
+                                            <div class="hidden sm:block" [mat-sort-header]="'active'">
+                                                რაიონი
+                                            </div>
+                                            <div class="hidden sm:block">ნახვა</div>
+                                        </div>
+
+                                        <!-- <div class="grid-cols-6 z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
+                                            matSort matSortDisableClear>
+                                            <div class="hidden lg:block" [mat-sort-header]="'type1'">
+                                                ტიპი
+                                            </div>
+                                            <div class="hidden lg:block" [mat-sort-header]="'contry1'">ქვეყანა</div>
+                                            <div class="hidden lg:block" [mat-sort-header]="'reigion1'">
+                                                რეგიონი
+                                            </div>
+                                            <div class="hidden lg:block" [mat-sort-header]="'city1'">
+                                                ქალაქი
+                                            </div>
+                                            <div class="hidden lg:block" [mat-sort-header]="'vilage1'">
+                                                რაიონი
+                                            </div>
+                                            <div class="hidden lg:block">ნახვა</div>
+                                        </div> -->
+
+                                        <ng-container *ngFor="let address of model.addresses;">
+                                            <div class="grid-cols-6 grid items-center gap-4 py-3 px-6 md:px-8 border-b">
+                                                <div class="hidden md:block truncate">
+                                                    {{address.typeName}}
+                                                </div>
+                                                <div class="hidden md:block truncate">
+                                                    {{address.countryName}}
+                                                </div>
+                                                <div class="hidden md:block truncate">
+                                                    {{address.regionName}}
+                                                </div>
+                                                <div class="hidden md:block truncate">
+                                                    {{address.cityName}}
+                                                </div>
+                                                <div class="hidden md:block truncate">
+                                                    {{address.vilageName}}
+                                                </div>
+                                                <div>
+                                                    <button class="min-w-10 min-h-7 h-7 px-2 leading-6"
+                                                        mat-stroked-button (click)="toggleDetails(address.id)">
+                                                        <mat-icon class="icon-size-5"
+                                                            [svgIcon]="selectedAddress?.id === address.id ? 'heroicons_solid:chevron-up' : 'heroicons_solid:chevron-down'">
+                                                        </mat-icon>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="grid">
+                                                <ng-container *ngIf="selectedAddress?.id === address.id">
+                                                    <ng-container
+                                                        *ngTemplateOutlet="rowDetailsTemplate; context: {$implicit: address}">
+                                                    </ng-container>
+                                                </ng-container>
+                                            </div>
+
+                                        </ng-container>
+                                    </div>
+                                </ng-container>
+                                <ng-template #rowDetailsTemplate let-product>
+                                    <div class="shadow-lg overflow-hidden">
+                                        <div class="flex border-b">
+                                            <!-- Selected product form -->
+                                            <form class="flex flex-col w-full" [formGroup]="selectedProductForm">
+                                                <div class="flex">
+                                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
+                                                        <mat-label>ტიპი</mat-label>
+                                                        <mat-select [(ngModel)]="selectedAddress.typeId"
+                                                            name="addressTypes">
+                                                            <mat-option></mat-option>
+                                                            <ng-container *ngFor="let addressType of addressTypes">
+                                                                <mat-option [value]="addressType.id">
+                                                                    {{addressType.name}}
+                                                                </mat-option>
+                                                            </ng-container>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
+                                                        <mat-label>ქვეყანა</mat-label>
+                                                        <mat-select [(ngModel)]="selectedAddress.countryId"
+                                                            name="countries">
+                                                            <mat-option></mat-option>
+                                                            <ng-container *ngFor="let country of countries">
+                                                                <mat-option [value]="country.id">
+                                                                    {{country.name}}
+                                                                </mat-option>
+                                                            </ng-container>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
+                                                        <mat-label>რეგიონი</mat-label>
+                                                        <mat-select [(ngModel)]="selectedAddress.regionId"
+                                                            name="regions">
+                                                            <mat-option></mat-option>
+                                                            <ng-container *ngFor="let region of regions">
+                                                                <mat-option [value]="region.id">
+                                                                    {{region.name}}
+                                                                </mat-option>
+                                                            </ng-container>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
+                                                        <mat-label>ქალაქი</mat-label>
+                                                        <mat-select [(ngModel)]="selectedAddress.cityId"
+                                                            name="countries">
+                                                            <mat-option></mat-option>
+                                                            <ng-container *ngFor="let city of cities">
+                                                                <mat-option [value]="city.id">
+                                                                    {{city.name}}
+                                                                </mat-option>
+                                                            </ng-container>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
+                                                        <mat-label>სოფელი</mat-label>
+                                                        <mat-select [(ngModel)]="selectedAddress.vilageId"
+                                                            name="vilages">
+                                                            <mat-option></mat-option>
+                                                            <ng-container *ngFor="let vilage of vilages">
+                                                                <mat-option [value]="vilage.id">
+                                                                    {{vilage.name}}
+                                                                </mat-option>
+                                                            </ng-container>
+                                                        </mat-select>
+                                                    </mat-form-field>
+
+                                                </div>
+
+                                                <div
+                                                    class="flex items-center justify-between w-full border-t px-8 py-4">
+                                                    <button *ngIf="selectedAddress?.id !== 0" class="-ml-4" mat-button
+                                                        [color]="'warn'">
+                                                        წაშლა
+                                                    </button>
+                                                    <div *ngIf="selectedAddress?.id === 0" class="-ml-4"></div>
+                                                    <button mat-flat-button [color]="'primary'">
+                                                        {{addressButtonText}}
+                                                    </button>
+
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between w-full border-t px-8 py-4">
+                        <button class="-ml-4" mat-button [color]="'warn'">
+                            წაშლა
+                        </button>
+                        <!-- <div *ngIf="selectedAddress?.id === 0" class="-ml-4"></div> -->
+                        <button mat-flat-button [color]="'primary'">
+                            {{addressButtonText}}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </ng-container>
+
+
+
+
+</div>

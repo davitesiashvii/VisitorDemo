@@ -1,0 +1,159 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+    <mat-drawer-container class="flex-auto h-full bg-card dark:bg-transparent"
+        class="flex-auto h-full bg-card dark:bg-transparent" (backdropClick)="onBackdropClicked()">
+
+        <!-- Drawer -->
+        <mat-drawer class="w-full md:w-160 dark:bg-gray-900" [mode]="drawerMode" [opened]="opened" [position]="'end'"
+            [disableClose]="true" #matDrawer1>
+            <router-outlet></router-outlet>
+        </mat-drawer>
+
+
+
+        <mat-drawer-content class="flex flex-col">
+            <ng-container>
+                <div class="flex flex-auto overflow-hidden">
+                    <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
+                        <form #form="ngForm" class="flex flex-col w-full">
+
+                            <div class="flex flex-col sm:flex-row p-8">
+                                <div class="flex flex-auto flex-wrap">
+                                    <div class="flex flex-col w-full ">
+                                        <div class="flex">
+
+                                            <mat-form-field class="fuse-mat-dense w-1/5 pr-7">
+                                                <mat-label>ვიზიტის ნომერი</mat-label>
+                                                <input matInput [readonly]="'true'" name="visitNumber"
+                                                    [(ngModel)]="model.visitNumber">
+                                            </mat-form-field>
+                                            <mat-form-field class="fuse-mat-dense w-1/5 pr-7">
+                                                <mat-label>ვიზიტის მოთხოვნის შექმნის თარიღი/დრო</mat-label>
+                                                <input matInput [readonly]="'true'" name="visitCreateDate"
+                                                    [(ngModel)]="model.visitCreateDate">
+                                            </mat-form-field>
+                                            <mat-form-field class="fuse-mat-dense w-1/5 pr-7">
+                                                <mat-label>მომხმარებელი რომელმაც შექმნა</mat-label>
+                                                <input matInput [readonly]="'true'" name="visitCreator"
+                                                    [(ngModel)]="model.visitCreator">
+                                            </mat-form-field>
+
+                                            <mat-form-field class="fuse-mat-dense w-1/5 pr-7">
+                                                <mat-label>ვიზიტის თარიღი</mat-label>
+                                                <input matInput [(ngModel)]="model.visitDate" name="visitDate"
+                                                    [matDatepicker]="picker1">
+                                                <mat-datepicker-toggle matSuffix [for]="picker1">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #picker1></mat-datepicker>
+                                            </mat-form-field>
+                                            <mat-form-field class="fuse-mat-dense w-1/5 pr-2">
+                                                <mat-label>ვიზიტის ქვე-ტიპი </mat-label>
+                                                <mat-select [(ngModel)]="model.visitTypeId" name="citizenshipType">
+                                                    <mat-option></mat-option>
+                                                    <ng-container *ngFor="let visitType of visitTypes">
+                                                        <mat-option [value]="visitType.id">
+                                                            {{visitType.name}}
+                                                        </mat-option>
+                                                    </ng-container>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                        </div>
+                                        <!-- <div class="flex">
+                                            <a (click)="open()" [routerLink]="['./', 'side']">side</a>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex pl-6">
+                                <button class="ml-4" mat-flat-button [color]="'primary'" (click)="serchPrisoner()">
+                                    <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                                    <span class="ml-2 mr-1">{{prisonerButtonText}}</span>
+                                </button>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row p-8">
+                                <div class="flex flex-auto flex-wrap">
+                                    <div class="flex flex-col w-full ">
+                                        <ng-container>
+                                            <div class="grid">
+                                                <div class="grid-cols-6 z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
+                                                    matSort matSortDisableClear>
+                                                    <div class="hidden md:block" [mat-sort-header]="'sku'">
+                                                        სახელი
+                                                    </div>
+                                                    <div [mat-sort-header]="'name'">გვარი</div>
+                                                    <div class="hidden sm:block" [mat-sort-header]="'price'">
+                                                        პირადი ნომერი
+                                                    </div>
+                                                    <div class="hidden sm:block" [mat-sort-header]="'stock'">
+                                                        დაბადების თარიღი
+                                                    </div>
+                                                    <div class="hidden sm:block" [mat-sort-header]="'active'">
+                                                        სქესი
+                                                    </div>
+                                                    <div class="hidden sm:block">დეტალური ინფორმაცია</div>
+                                                </div>
+
+                                                <!-- <div class="grid-cols-6 z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
+                                                    matSort matSortDisableClear>
+                                                    <div class="hidden lg:block" [mat-sort-header]="'type1'">
+                                                        ტიპი
+                                                    </div>
+                                                    <div class="hidden lg:block" [mat-sort-header]="'contry1'">ქვეყანა</div>
+                                                    <div class="hidden lg:block" [mat-sort-header]="'reigion1'">
+                                                        რეგიონი
+                                                    </div>
+                                                    <div class="hidden lg:block" [mat-sort-header]="'city1'">
+                                                        ქალაქი
+                                                    </div>
+                                                    <div class="hidden lg:block" [mat-sort-header]="'vilage1'">
+                                                        რაიონი
+                                                    </div>
+                                                    <div class="hidden lg:block">ნახვა</div>
+                                                </div> -->
+
+                                                <ng-container *ngIf="prisoner.Id">
+                                                    <div
+                                                        class="grid-cols-6 grid items-center gap-4 py-3 px-6 md:px-8 border-b">
+                                                        <div class="hidden md:block truncate">
+                                                            {{prisoner.FirstName}}
+                                                        </div>
+                                                        <div class="hidden md:block truncate">
+                                                            {{prisoner.LastName}}
+                                                        </div>
+                                                        <div class="hidden md:block truncate">
+                                                            {{prisoner.privateNumber}}
+                                                        </div>
+                                                        <div class="hidden md:block truncate">
+                                                            {{prisoner.Birthdate}}
+                                                        </div>
+                                                        <div class="hidden md:block truncate">
+                                                            {{prisoner.Gender}}
+                                                        </div>
+                                                        <div>
+                                                            <a (click)="open()" [routerLink]="['./side', prisoner.Id]" class="min-w-10 min-h-7 h-7 px-2 leading-6"
+                                                                mat-stroked-button>
+                                                                <mat-icon class="icon-size-5"
+                                                                    [svgIcon]=" 'heroicons_solid:chevron-up'">
+                                                                </mat-icon>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </ng-container>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </ng-container>
+
+        </mat-drawer-content>
+    </mat-drawer-container>
+
+</div>

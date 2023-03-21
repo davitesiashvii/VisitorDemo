@@ -1,0 +1,113 @@
+<div class="flex flex-col w-full">
+
+    <!-- View mode -->
+    <ng-container >
+
+        
+        <!-- Header -->
+        <div class="relative w-full h-40 sm:h-48 px-8 sm:px-12 bg-accent-100 dark:bg-accent-700">
+            <!-- Background -->
+            
+            <!-- Close button -->
+            
+        </div>
+
+        <div class="flex">
+            <div class="relative  items-center p-6 pt-0 sm:p-12 sm:pt-0">
+                <div class="w-full max-w-3xl">
+                    <div class=" items-center justify-end w-full max-w-3xl mx-auto pt-6">
+                        <ng-container class="mt-5" >
+                            <div class="flex sm:items-center">
+                                <mat-icon [svgIcon]="'heroicons_outline:location-marker'"></mat-icon>
+                                <div class="ml-6 leading-6">{{prisoner.FirstName}}, {{prisoner.LastName}}, {{prisoner.MiddleName}}.</div>
+                            </div>
+                        </ng-container>
+            
+
+                        <ng-container >
+                            <div class="flex">
+                                <mat-icon [svgIcon]="'heroicons_outline:mail'"></mat-icon>
+                                <div class="min-w-0 ml-6 space-y-1">
+                                    <ng-container >
+                                        <div class="flex items-center leading-6">
+                                            <div
+                                                class="text-md truncate text-secondary">
+                                                <span class="mx-2">&bull;</span>
+                                                <span class="font-medium">პირადი ნომერი/პასპორტი:   </span>
+                                                <span></span>
+                                            </div>
+                                            <div class="ml-4">
+                                                {{prisoner.privateNumber}}
+                                            </div>
+                                            
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container >
+                            <div class="flex">
+                                <mat-icon [svgIcon]="'heroicons_outline:mail'"></mat-icon>
+                                <div class="min-w-0 ml-6 space-y-1">
+                                    <ng-container >
+                                        <div class="flex items-center leading-6">
+                                            <div
+                                                class="text-md truncate text-secondary">
+                                                <span class="mx-2">&bull;</span>
+                                                <span class="font-medium">სქესი</span>
+                                                <span></span>
+                                            </div>
+                                            <div class="ml-4">
+                                                {{prisoner.Gender}}
+                                            </div>
+                                            
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </ng-container>
+                       
+                        <ng-container >
+                            <div class="flex sm:items-center">
+                                <mat-icon [svgIcon]="'heroicons_outline:location-marker'"></mat-icon>
+                                <div class="ml-6 leading-6">{{prisoner.Gender}}</div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container >
+                            <div class="flex sm:items-center">
+                                <mat-icon [svgIcon]="'heroicons_outline:location-marker'"></mat-icon>
+                                <div class="ml-6 leading-6">{{prisoner.Gender}}</div>
+                            </div>
+                        </ng-container>
+                       
+                       
+                       
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        
+
+
+
+        <!-- <ng-container >
+            <div class="flex sm:items-center">
+                <mat-icon [svgIcon]="'heroicons_outline:cake'"></mat-icon>
+                <div class="ml-6 leading-6">{{contact.birthday | date:'longDate'}}</div>
+            </div>
+        </ng-container>
+
+        <ng-container >
+            <div class="flex">
+                <mat-icon [svgIcon]="'heroicons_outline:menu-alt-2'"></mat-icon>
+                <div
+                    class="max-w-none ml-6 prose prose-sm"
+                    [innerHTML]="contact.notes"></div>
+            </div>
+        </ng-container> -->
+    </ng-container>
+</div>

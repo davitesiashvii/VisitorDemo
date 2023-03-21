@@ -1,0 +1,22 @@
+<div style="width: 100%; height: 100%;">
+    <div class="mb-10">
+        <button class="ml-4" mat-flat-button [color]="'primary'" (click)="newVisitor()">
+            <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+            <span class="ml-2 mr-1">ვიზიტორის დამატება</span>
+        </button>
+</div>
+
+<div class="pb-20" style="width: 100%; height: 100%;">
+    <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-material" (gridReady)="onGridReady($event)"
+            (rowDoubleClicked)="onRowDoubleClick($event)" [rowData]="rowData" [gridOptions]="gridOptions"
+            [columnDefs]="columnDefs" [rowDragManaged]="true" [rowDragMultiRow]="true" [rowSelection]="rowSelection"
+            [animateRows]="true" [suppressRowClickSelection]="true">
+        </ag-grid-angular>
+</div>
+
+</div>
+
+   
+        
+
+

@@ -1,0 +1,12 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import "~ag-grid-community/styles/ag-grid.min.css";
+@import "~ag-grid-community/styles/ag-theme-alpine.min.css";
+@import "~ag-grid-community/styles/ag-theme-material.min.css";
+@import "~ag-grid-community/styles/ag-theme-balham.min.css";
