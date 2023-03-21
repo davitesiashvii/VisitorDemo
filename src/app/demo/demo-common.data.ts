@@ -89,7 +89,7 @@ export class DemoCommonData {
         // }
     ];
 
-    
+
 
     visitors: VisitorVm[] = [
         {
@@ -293,6 +293,74 @@ export class DemoCommonData {
             id: 3,
             name: "სხვა",
         }
+    ]
+
+    visitorAndPrisonerConnectionTypes: any[] = [
+        {
+            id: 1,
+            name: "ადვოკატი",
+        },
+        {
+            id: 2,
+            name: "პროკურორი",
+        },
+        {
+            id: 3,
+            name: "სასულიერო პირი",
+        }
+    ]
+
+    visitLocations: any[] = [
+        {
+            id: 1,
+            name: "ბარიერით შეხვედრა",
+        },
+        {
+            id: 2,
+            name: "პირდაპირ შეხვედრა",
+        }
+    ];
+
+    visitTimes: any[] = [
+        {
+            id: 1,
+            name: "10:00",
+        },
+        {
+            id: 2,
+            name: "10:30",
+        },
+        {
+            id: 3,
+            name: "11:00",
+        },
+        {
+            id: 4,
+            name: "10:30",
+        },
+        {
+            id: 5,
+            name: "12:00",
+        },
+        {
+            id: 6,
+            name: "12:30",
+        }
+    ]
+
+    visitStatuses: any[] = [
+        {
+            id: 1,
+            name: "დაგეგმილი",
+        },
+        {
+            id: 2,
+            name: "გაუქმებული",
+        },
+        {
+            id: 3,
+            name: "დაწყებული",
+        },
     ]
 
     constructor() {

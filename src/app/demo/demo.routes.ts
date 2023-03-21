@@ -1,5 +1,6 @@
 import { Route } from "@angular/router";
 import { DemoRootComponent } from "./demo-root.component";
+import { PrisonerInfoSidebarEditEditComponent } from "./visit/prisoner-sidebar/prisoner-info-sidebar.component";
 import { VisitEditComponent } from "./visit/visit-edit/visit-edit.component";
 import { VisitorSidebarEditEditComponent } from "./visit/visitor-sidebar/visitor-sidebar-edit.component";
 import { VisitorEditComponent } from "./visitor/visitor-edit/visitor-edit.component";
@@ -26,6 +27,10 @@ export const DemoRoutes: Route[] = [
                 children : [
                     {
                         path         : 'side/:prisonerId',
+                        component    : PrisonerInfoSidebarEditEditComponent,
+                    },
+                    {
+                        path         : 'visitor-side/:visitorId',
                         component    : VisitorSidebarEditEditComponent,
                     }
                 ]

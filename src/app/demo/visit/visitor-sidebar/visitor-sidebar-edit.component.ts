@@ -24,11 +24,10 @@ export class VisitorSidebarEditEditComponent implements OnInit {
 
     ngOnInit(): void {
 
-        console.warn("2434");
         this._router.params.subscribe(params => {
-            if(params['prisonerId']){
-                let id = +params['prisonerId'];
-                this.prisoner = this._demoCommonDate.prisoners.find(x=>x.Id === id);
+            if(params['visitorId']){
+                let id = +params['visitorId'];
+                this.prisoner = this._demoCommonDate.visitors.find(x=>x.id === id);
             }  
         })
         //this.prisoner = this._demoCommonDate.prisoners[0];

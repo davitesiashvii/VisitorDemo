@@ -20,14 +20,24 @@ import { Subject, takeUntil } from "rxjs";
 export class VisitEditComponent implements OnInit {
 
     @ViewChild('matDrawer1', { static: true }) matDrawer1: MatDrawer;
+    @ViewChild('matDrawer2', { static: true }) matDrawer2: MatDrawer;
     model: any = {};
     visitTypes: any = {};
+    visitorAndPrisonerConnectionTypes: any[] = [];
+    visitLocations: any[] = [];
+    visitTimes: any[] = [];
+    visitStatuses: any[] = [];
+    
     drawerMode: 'side' | 'over';
+    drawerMode1: 'side' | 'over';
+    visitFreeSpace: number = 4;
     opened: boolean = false;
+    opened1: boolean = true;
     prisoner:any = {};
-    visitor: any = {};
+    visitors: any[] = [];
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     prisonerButtonText: string = "პატიმრის დამატება";
+    visitoresButtonText: string = "ვიზიტორის დამატება";
     //prisonerButtonText: string = "პატიმრის დამატება";
     prisonerAdded: boolean = false;
     sidebarOpened: boolean = false;
@@ -40,13 +50,23 @@ export class VisitEditComponent implements OnInit {
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
         private _matDialog: MatDialog,
-    ) { }
+    ) { 
+        _router.events.subscribe((val) => {
+            console.warn("musghaobvs");
+        });
+    }
 
     ngOnInit(): void {
         this.model.visitCreateDate = new Date().toDateString();
         this.model.visitNumber = '21456';
         this.model.visitCreator = 'დავით ესიაშვილი';
         this.visitTypes = this._demoCommonDate.visitTypes;
+        this.visitorAndPrisonerConnectionTypes = this._demoCommonDate.visitorAndPrisonerConnectionTypes;
+        this.visitLocations = this._demoCommonDate.visitLocations;
+        this.visitTimes = this._demoCommonDate.visitTimes;
+        this.visitStatuses = this._demoCommonDate.visitStatuses;
+        this.model.freeSpace = 3;
+
 
         this._fuseMediaWatcherService.onMediaChange$
             .pipe(takeUntil(this._unsubscribeAll))
@@ -89,14 +109,18 @@ export class VisitEditComponent implements OnInit {
     open(){
         if(!this.sidebarOpened){
             this.drawerMode = 'side';
-            //this.opened = true;
-            this.matDrawer1.open();
+            this.opened = true;
+           // this.matDrawer1.open();
             this.sidebarOpened = true;
         }
         else{
-            this.matDrawer1.close();
             this.sidebarOpened = false;
+            this.opened = false;
         }
+        
+    }
+
+    openVisitor(){
         
     }
 
@@ -108,22 +132,33 @@ export class VisitEditComponent implements OnInit {
             this.prisoner = this._demoCommonDate.prisoners.find(x=>x.Id === result);
             this.prisonerButtonText = "პატიმრის შეცვლა";
             //let roteText = '/visitor/visit-edit/side/'+this.prisoner.Id.toString(); 
+            this._router.navigate(['./'], {relativeTo: this._activatedRoute});
             this.matDrawer1.close();
+            this.matDrawer2.close();
+            
             this.sidebarOpened = false;
         })
     }
+    
 
-    searchVisitor(){
+    serchVisitor(){
         this._matDialog.open(VisitorSearch, {autoFocus: false})
         .afterClosed()
         .subscribe((result: any | undefined) => {
             debugger;
-            this.visitor = this._demoCommonDate.prisoners.find(x=>x.Id === result);
-            this.prisonerButtonText = "პატიმრის შეცვლა";
-            //let roteText = '/visitor/visit-edit/side/'+this.prisoner.Id.toString(); 
-            this.matDrawer1.close();
-            this.sidebarOpened = false;
-        })
+            this.visitors.push(this._demoCommonDate.visitors.find(x=>x.id === result));
+            this.visitoresButtonText = "ვიზიტორის შეცვლა";
+            this._router.navigate(['./'], {relativeTo: this._activatedRoute});
+            this.matDrawer2.close();
+            this.matDrawer2.close();
+            this.opened1 = true;
+            //this.sidebarOpened = false;
+        });
+    }
+
+    deleteVisitor(id){
+        debugger;
+        this.visitors = this.visitors.filter(x => x.id !== id);
     }
 
 }
