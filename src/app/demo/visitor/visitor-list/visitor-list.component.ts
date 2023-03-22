@@ -28,6 +28,9 @@ export class VisitorListComponent implements OnInit{
     
     ngOnInit(): void {
        this._initializeGrid();
+       for(let i = 0; i< this._demoCommonData.visitors.length; i++){
+        this._demoCommonData.visitors[i].birthsDateToString = this._demoCommonData.visitors[i].birthsDate.toISOString().slice(0,10);
+        }
        this.rowData = this._demoCommonData.visitors;
        
     }
@@ -36,7 +39,11 @@ export class VisitorListComponent implements OnInit{
         this._router.navigate(['visitor/visitor-edit/new']);
     }
 
+
     onGridReady(params) {
+        for(let i = 0; i< this._demoCommonData.visitors.length; i++){
+            this._demoCommonData.visitors[i].birthsDateToString = this._demoCommonData.visitors[i].birthsDate.toISOString().slice(0,10);
+        }
         this.gridApi = params.api;
         this.rowData = this._demoCommonData.visitors;
         this.gridApi.sizeColumnsToFit();
@@ -64,18 +71,18 @@ export class VisitorListComponent implements OnInit{
 
     private _setGridColumns() {
         this.columnDefs = [
-            // {
-            //     headerName: '',
-            //     field: 'CheckAll',
-            //     lockPosition: true,
-            //     lockVisible: true,
-            //     width: 30,
-            //     resizable: false,
-            //     suppressMenu: true,
-            //     headerCheckboxSelection: false,
-            //     headerCheckboxSelectionFilteredOnly: true,
-            //     checkboxSelection: true
-            // },
+            {
+                headerName: '',
+                field: 'CheckAll',
+                lockPosition: true,
+                lockVisible: true,
+                width: 20,
+                resizable: false,
+                suppressMenu: true,
+                headerCheckboxSelection: false,
+                headerCheckboxSelectionFilteredOnly: true,
+                checkboxSelection: true
+            },
             {
                 headerName: 'სახელი',
                 field: 'firstName',
@@ -120,7 +127,7 @@ export class VisitorListComponent implements OnInit{
             },
             {
                 headerName: 'დაბადების თარიღი',
-                field: 'birthsdate',
+                field: 'birthsDateToString',
                 sortable: true,
                 resizable: true,
                 filter: true,

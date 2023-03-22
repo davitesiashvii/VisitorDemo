@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DemoCommonData } from './demo-common.data';
 
 @Component({
-  template:`<router-outlet></router-outlet>`
+  templateUrl: './demo-root.component.html',
 })
 export class DemoRootComponent implements OnInit {
 

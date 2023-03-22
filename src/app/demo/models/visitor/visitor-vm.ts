@@ -6,7 +6,8 @@ export class VisitorVm{
     lastName: string;
     middleName: string;
     idNumber: string;
-    birthsDate:string;
+    birthsDate: Date;
+    birthsDateToString:string = '';
     gender:string;
     privaterNumber: string;
     email: string;

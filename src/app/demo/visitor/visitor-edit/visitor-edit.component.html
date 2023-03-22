@@ -14,21 +14,21 @@
                                 <div class="flex">
                                     <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
                                         <mat-label>სახელი</mat-label>
-                                        <input matInput name="firstName" [(ngModel)]="model.firstName">
+                                        <input matInput name="firstName" [(ngModel)]="model.firstName" required>
                                     </mat-form-field>
                                     <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
                                         <mat-label>გვარი</mat-label>
-                                        <input matInput name="lastName" [(ngModel)]="model.lastName">
+                                        <input matInput name="lastName" [(ngModel)]="model.lastName" required>
                                     </mat-form-field>
                                     <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
                                         <mat-label>მამის სახელი</mat-label>
-                                        <input matInput name="middleName" [ngModel]="model.middleName">
+                                        <input matInput name="middleName" [ngModel]="model.middleName" >
                                     </mat-form-field>
 
                                     <mat-form-field class="fuse-mat-dense w-1/4 pr-2">
                                         <mat-label>დაბადების თარიღი</mat-label>
                                         <input matInput [(ngModel)]="model.birthsDate" name="birthsDate"
-                                            [matDatepicker]="picker1">
+                                            [matDatepicker]="picker1" required>
                                         <mat-datepicker-toggle matSuffix [for]="picker1">
                                         </mat-datepicker-toggle>
                                         <mat-datepicker #picker1></mat-datepicker>
@@ -36,14 +36,30 @@
                                 </div>
 
                                 <div class="flex">
+                                    <!-- <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
+                                        <mat-label>სქესი</mat-label>
+                                        <input matInput [(ngModel)]="model.gender" name="gender" required>
+                                    </mat-form-field> -->
+
                                     <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
                                         <mat-label>სქესი</mat-label>
-                                        <input matInput [(ngModel)]="model.gender" name="gender">
+                                        <mat-select [(ngModel)]="model.gender" name="gender" required>
+                                                <mat-option [value]="'მამრობითი'">
+                                                    მამრობითი
+                                                </mat-option>
+                                                <mat-option [value]="'მდედრობითი'">
+                                                    მდედრობითი
+                                                </mat-option>
+                                                <mat-option [value]="'სხვა'">
+                                                    სხვა
+                                                </mat-option>
+                                        </mat-select>
                                     </mat-form-field>
+                                    
 
                                     <mat-form-field class="fuse-mat-dense fuse-mat-emphasized-affix w-1/4 pr-7">
                                         <mat-label>პირადობის მოწმობა/პასპორტი</mat-label>
-                                        <input matInput name="privateNumber" [(ngModel)]="model.privaterNumber">
+                                        <input matInput name="idNumber" [(ngModel)]="model.idNumber" required>
                                         <mat-select [value]="'პირადობა'" matPrefix>
                                             <mat-option [value]="'პირადობა'">პირადობა</mat-option>
                                             <mat-option [value]="'პასპორტი'">პასპორტი</mat-option>
@@ -64,7 +80,7 @@
                                 <div class="flex">
                                     <mat-form-field class="fuse-mat-dense w-1/4 pr-7">
                                         <mat-label>მოქალაქეობის ტიპი</mat-label>
-                                        <mat-select [(ngModel)]="model.citizenshipTypeId" name="citizenshipType">
+                                        <mat-select [(ngModel)]="model.citizenshipTypeId" name="citizenshipType" required>
                                             <mat-option></mat-option>
                                             <ng-container *ngFor="let citizenshipType of citizenshipTypes">
                                                 <mat-option [value]="citizenshipType.id">
@@ -77,7 +93,7 @@
                                     <mat-form-field *ngIf="model.citizenshipTypeId == 2 || model.citizenshipTypeId == 3"
                                         class="fuse-mat-dense w-1/4 pr-7">
                                         <mat-label>მოქალაქეობა</mat-label>
-                                        <mat-select [(ngModel)]="model.citizenshipId" name="citizenship">
+                                        <mat-select [(ngModel)]="model.citizenshipId" name="citizenship" required>
                                             <ng-container *ngFor="let citizenship of countries">
                                                 <mat-option [value]="citizenship.id">
                                                     {{citizenship.name}}
@@ -89,7 +105,7 @@
                                     <mat-form-field *ngIf="model.citizenshipTypeId == 3"
                                         class="fuse-mat-dense w-1/4 pr-7">
                                         <mat-label>მეორე მოქალაქეობა</mat-label>
-                                        <mat-select [(ngModel)]="model.secondCitizenshipId" name="secondCitizenship">
+                                        <mat-select [(ngModel)]="model.secondCitizenshipId" name="secondCitizenship" required>
                                             <ng-container *ngFor="let citizenship of countries">
                                                 <mat-option [value]="citizenship.id">
                                                     {{citizenship.name}}
@@ -139,7 +155,7 @@
 
                     <div class="flex flex-col sm:flex-row p-8">
                         <div class="flex flex-auto flex-wrap">
-                            <div class="flex flex-col w-full ">
+                            <div class="flex flex-col w-full">
                                 <ng-container>
                                     <div class="grid">
                                         <div class="grid-cols-6 z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
@@ -199,13 +215,13 @@
                                                     <button class="min-w-10 min-h-7 h-7 px-2 leading-6"
                                                         mat-stroked-button (click)="toggleDetails(address.id)">
                                                         <mat-icon class="icon-size-5"
-                                                            [svgIcon]="selectedAddress?.id === address.id ? 'heroicons_solid:chevron-up' : 'heroicons_solid:chevron-down'">
+                                                            [svgIcon]="selectedaddressId === address.id ? 'heroicons_solid:chevron-up' : 'heroicons_solid:chevron-down'">
                                                         </mat-icon>
                                                     </button>
                                                 </div>
                                             </div>
                                             <div class="grid">
-                                                <ng-container *ngIf="selectedAddress?.id === address.id">
+                                                <ng-container *ngIf="selectedaddressId === address.id">
                                                     <ng-container
                                                         *ngTemplateOutlet="rowDetailsTemplate; context: {$implicit: address}">
                                                     </ng-container>
@@ -217,7 +233,7 @@
                                 </ng-container>
                                 <ng-template #rowDetailsTemplate let-product>
                                     <div class="shadow-lg overflow-hidden">
-                                        <div class="flex border-b">
+                                        <div class="flex border-b pl-7 pt-7">
                                             <!-- Selected product form -->
                                             <form class="flex flex-col w-full" [formGroup]="selectedProductForm">
                                                 <div class="flex">
@@ -286,12 +302,12 @@
 
                                                 <div
                                                     class="flex items-center justify-between w-full border-t px-8 py-4">
-                                                    <button *ngIf="selectedAddress?.id !== 0" class="-ml-4" mat-button
+                                                    <button *ngIf="selectedAddress?.id !== 0" class="-ml-4" mat-button (click) = "deleteAddress()"
                                                         [color]="'warn'">
                                                         წაშლა
                                                     </button>
                                                     <div *ngIf="selectedAddress?.id === 0" class="-ml-4"></div>
-                                                    <button mat-flat-button [color]="'primary'">
+                                                    <button mat-flat-button [color]="'primary'" (click) = "createAddres()">
                                                         {{addressButtonText}}
                                                     </button>
 
@@ -305,12 +321,12 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-between w-full border-t px-8 py-4">
-                        <button class="-ml-4" mat-button [color]="'warn'">
+                        <button *ngIf="editMode" class="-ml-4" mat-button [color]="'warn'" (click) ="remove()">
                             წაშლა
                         </button>
-                        <!-- <div *ngIf="selectedAddress?.id === 0" class="-ml-4"></div> -->
-                        <button mat-flat-button [color]="'primary'">
-                            {{addressButtonText}}
+                        <div *ngIf="!editMode" class="-ml-4"></div>
+                        <button [disabled]="!form.valid" mat-flat-button [color]="'primary'" (click) = "save()">
+                            {{visitorButtonText}}
                         </button>
                     </div>
                 </form>

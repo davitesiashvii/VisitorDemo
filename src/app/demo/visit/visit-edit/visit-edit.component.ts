@@ -27,13 +27,13 @@ export class VisitEditComponent implements OnInit {
     visitLocations: any[] = [];
     visitTimes: any[] = [];
     visitStatuses: any[] = [];
-    
+
     drawerMode: 'side' | 'over';
     drawerMode1: 'side' | 'over';
     visitFreeSpace: number = 4;
     opened: boolean = false;
     opened1: boolean = true;
-    prisoner:any = {};
+    prisoner: any = {};
     visitors: any[] = [];
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     prisonerButtonText: string = "პატიმრის დამატება";
@@ -50,7 +50,7 @@ export class VisitEditComponent implements OnInit {
         private _changeDetectorRef: ChangeDetectorRef,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
         private _matDialog: MatDialog,
-    ) { 
+    ) {
         _router.events.subscribe((val) => {
             console.warn("musghaobvs");
         });
@@ -70,15 +70,13 @@ export class VisitEditComponent implements OnInit {
 
         this._fuseMediaWatcherService.onMediaChange$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(({matchingAliases}) => {
+            .subscribe(({ matchingAliases }) => {
 
                 // Set the drawerMode if the given breakpoint is active
-                if ( matchingAliases.includes('lg') )
-                {
+                if (matchingAliases.includes('lg')) {
                     this.drawerMode = 'side';
                 }
-                else
-                {
+                else {
                     this.drawerMode = 'over';
                 }
 
@@ -87,8 +85,7 @@ export class VisitEditComponent implements OnInit {
             });
 
         this.matDrawer1.openedChange.subscribe((opened) => {
-            if ( !opened )
-            {
+            if (!opened) {
                 // Remove the selected contact when drawer closed
                 // this.selectedContact = null;
 
@@ -100,63 +97,71 @@ export class VisitEditComponent implements OnInit {
 
     onBackdropClicked() {
         // Go back to the list
-        this._router.navigate(['./'], {relativeTo: this._activatedRoute});
+        this._router.navigate(['./'], { relativeTo: this._activatedRoute });
 
         this._changeDetectorRef.markForCheck();
 
     }
 
-    open(){
-        if(!this.sidebarOpened){
+    open() {
+        if (!this.sidebarOpened) {
             this.drawerMode = 'side';
             this.opened = true;
-           // this.matDrawer1.open();
+            // this.matDrawer1.open();
             this.sidebarOpened = true;
         }
-        else{
+        else {
             this.sidebarOpened = false;
             this.opened = false;
         }
-        
+
     }
 
-    openVisitor(){
-        
+    openVisitor() {
+
     }
 
-    serchPrisoner(){
-        this._matDialog.open(PrisonerSearch, {autoFocus: false})
-        .afterClosed()
-        .subscribe((result: any | undefined) => {
-            debugger;
-            this.prisoner = this._demoCommonDate.prisoners.find(x=>x.Id === result);
-            this.prisonerButtonText = "პატიმრის შეცვლა";
-            //let roteText = '/visitor/visit-edit/side/'+this.prisoner.Id.toString(); 
-            this._router.navigate(['./'], {relativeTo: this._activatedRoute});
-            this.matDrawer1.close();
-            this.matDrawer2.close();
-            
-            this.sidebarOpened = false;
-        })
-    }
-    
+    serchPrisoner() {
+        this._matDialog.open(PrisonerSearch, { autoFocus: false })
+            .afterClosed()
+            .subscribe((result: any | undefined) => {
+                debugger;
+                if (result) {
+                    this.prisoner = this._demoCommonDate.prisoners.find(x => x.Id === result);
+                    this.prisonerButtonText = "პატიმრის შეცვლა";
+                    //let roteText = '/visitor/visit-edit/side/'+this.prisoner.Id.toString(); 
+                    this._router.navigate(['./'], { relativeTo: this._activatedRoute });
+                    this.matDrawer1.close();
+                    this.matDrawer2.close();
 
-    serchVisitor(){
-        this._matDialog.open(VisitorSearch, {autoFocus: false})
-        .afterClosed()
-        .subscribe((result: any | undefined) => {
-            debugger;
-            this.visitors.push(this._demoCommonDate.visitors.find(x=>x.id === result));
-            this.visitoresButtonText = "ვიზიტორის შეცვლა";
-            this._router.navigate(['./'], {relativeTo: this._activatedRoute});
-            this.matDrawer2.close();
-            this.matDrawer2.close();
-            this.opened1 = true;
-            //this.sidebarOpened = false;
-        });
+                }
+
+
+                this.sidebarOpened = false;
+            })
     }
 
-    deleteVisitor(id){
+
+    serchVisitor() {
+        this._matDialog.open(VisitorSearch, { autoFocus: false })
+            .afterClosed()
+            .subscribe((result: any | undefined) => {
+                debugger;
+                if (result) {
+                    this.visitors.push(this._demoCommonDate.visitors.find(x => x.id === result));
+                    this.visitoresButtonText = "ვიზიტორის შეცვლა";
+                    this._router.navigate(['./'], { relativeTo: this._activatedRoute });
+                    this.matDrawer2.close();
+                    this.matDrawer2.close();
+                    this.opened1 = true;
+
+                }
+
+                //this.sidebarOpened = false;
+            });
+    }
+
+    deleteVisitor(id) {
         debugger;
         this.visitors = this.visitors.filter(x => x.id !== id);
     }
